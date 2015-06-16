@@ -16,7 +16,7 @@ namespace StarMap
         {
             this.Origin = begin;
             this.X = end.X - begin.X;
-            this.Y = end.Y - begin.X;
+            this.Y = end.Y - begin.Y;
         }
 
         public double Length()

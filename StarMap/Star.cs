@@ -28,6 +28,18 @@ namespace StarMap
             return new Star(x1, y1);
         }
 
+        public bool InLocal(Star other)
+        {
+            if (Math.Sqrt(Math.Pow(X - other.X, 2) + Math.Pow(Y - other.Y, 2)) < 1.0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public bool Equals(Star other)
         {
             return (X.Equals(other.X) && Y.Equals(other.Y));

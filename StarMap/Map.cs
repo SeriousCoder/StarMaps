@@ -29,23 +29,42 @@ namespace StarMap
             _listStars.Add(newStar);
         }
 
-        public int Combine(Map map1, Map map2)
+        static public int Combine(Map map1, Map map2)
         {
+            int maxCorr = 0;
+
             foreach (var edge1 in map1._listEdges)
             {
                 foreach (var edge2 in map2._listEdges)
                 {
-                    if (edge1 == edge2)
+                    if (!edge1.Equals(edge2)) continue;
+                    int corr = 1; 
+
+                    var x0 = edge2.Origin.X - edge1.Origin.X;
+                    var y0 = edge2.Origin.Y - edge1.Origin.Y;
+
+                    var angle = Math.Acos((edge1.X * edge2.X + edge1.Y * edge2.Y) / edge1.Length() / edge2.Length());
+
+                    if (edge1.X * edge2.Y - edge1.Y * edge2.X < 0)
                     {
-                        var x0 = edge2.X - edge1.X;
-                        var y0 = edge2.Y - edge1.Y;
+                        angle *= -1;
+                    }
 
-                        var angle = Math.Acos((edge1.X * edge2.X + edge1.Y * edge2.Y) / edge1.Length() / edge2.Length());
+                    foreach (var star in map1._listStars)
+                    {
+                        var modifStar = star.Convert(x0, y0, angle);
 
-                       
+                        corr += map2._listStars.Count(modifStar.InLocal);
+                    }
+
+                    if (corr > maxCorr)
+                    {
+                        maxCorr = corr;
                     }
                 }
             }
+
+            return maxCorr;
         }
     }
 }
