@@ -37,7 +37,12 @@ namespace StarMap
                 {
                     if (edge1 == edge2)
                     {
-                        
+                        var x0 = edge2.X - edge1.X;
+                        var y0 = edge2.Y - edge1.Y;
+
+                        var angle = Math.Acos((edge1.X * edge2.X + edge1.Y * edge2.Y) / edge1.Length() / edge2.Length());
+
+                       
                     }
                 }
             }
