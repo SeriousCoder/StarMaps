@@ -38,7 +38,7 @@ namespace StarMap
                 foreach (var edge2 in map2._listEdges)
                 {
                     if (!edge1.Equals(edge2)) continue;
-                    int corr = 1; 
+                    int corr = 0; 
 
                     var x0 = edge2.Origin.X - edge1.Origin.X;
                     var y0 = edge2.Origin.Y - edge1.Origin.Y;
@@ -52,7 +52,10 @@ namespace StarMap
 
                     foreach (var star in map1._listStars)
                     {
-                        var modifStar = star.Convert(x0, y0, angle);
+                        var modifStar = new Star(star.X - edge1.Origin.X, star.Y - edge1.Origin.Y);
+                        modifStar = modifStar.Turn(angle);
+                        modifStar.X += edge2.Origin.X;
+                        modifStar.Y += edge2.Origin.Y;
 
                         corr += map2._listStars.Count(modifStar.InLocal);
                     }
