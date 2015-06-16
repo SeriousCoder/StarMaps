@@ -17,7 +17,7 @@ namespace StarMap
             this.Y = y;
         }
 
-        private Star Convert(double x0, double y0, double angle)
+        public Star Convert(double x0, double y0, double angle)
         {
             var x = this.X + x0;
             var y = this.Y + y0;

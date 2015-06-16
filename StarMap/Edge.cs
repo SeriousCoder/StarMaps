@@ -19,9 +19,14 @@ namespace StarMap
             this.Y = end.Y - begin.X;
         }
 
+        public double Length()
+        {
+            return Math.Sqrt(X * X + Y * Y);
+        }
+
         public bool Equals(Edge other)
         {
-            return (Math.Sqrt(X * X + Y * Y).Equals(Math.Sqrt(other.X * other.X + other.Y * other.Y)));
+            return (this.Length().Equals(other.Length()));
         }
     }
 }
