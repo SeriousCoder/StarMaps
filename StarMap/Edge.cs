@@ -26,7 +26,7 @@ namespace StarMap
 
         public bool Equals(Edge other)
         {
-            return (this.Length().Equals(other.Length()));
+            return (Math.Abs(this.Length() - other.Length()) < 1.5);
         }
     }
 }
