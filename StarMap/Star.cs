@@ -17,15 +17,24 @@ namespace StarMap
             this.Y = y;
         }
 
-        private Star Convert(double x0, double y0, double angle)
+        public Star Turn(double angle)
         {
-            var x = this.X + x0;
-            var y = this.Y + y0;
-
-            var x1 = x * Math.Cos(angle) - y * Math.Sin(angle);
-            var y1 = x * Math.Sin(angle) + y * Math.Cos(angle);
+            var x1 = this.X * Math.Cos(angle) - this.Y * Math.Sin(angle);
+            var y1 = this.X * Math.Sin(angle) + this.Y * Math.Cos(angle);
 
             return new Star(x1, y1);
+        }
+
+        public bool InLocal(Star other)
+        {
+            if (Math.Sqrt(Math.Pow(X - other.X, 2) + Math.Pow(Y - other.Y, 2)) < 1.0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public bool Equals(Star other)

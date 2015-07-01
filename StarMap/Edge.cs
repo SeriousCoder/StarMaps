@@ -16,12 +16,17 @@ namespace StarMap
         {
             this.Origin = begin;
             this.X = end.X - begin.X;
-            this.Y = end.Y - begin.X;
+            this.Y = end.Y - begin.Y;
+        }
+
+        public double Length()
+        {
+            return Math.Sqrt(X * X + Y * Y);
         }
 
         public bool Equals(Edge other)
         {
-            return (Math.Sqrt(X * X + Y * Y).Equals(Math.Sqrt(other.X * other.X + other.Y * other.Y)));
+            return (Math.Abs(this.Length() - other.Length()) < 1.5);
         }
     }
 }
